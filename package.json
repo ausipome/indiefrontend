@@ -38,14 +38,13 @@
     "reactstrap": "^9.1.5",
     "stripe": "^10.12.0-beta.1",
     "styled-components": "^5.2.1",
-    "waait": "^1.0.5",
-    "webpack": "^5.74.0"
+    "waait": "^1.0.5"
   },
   "devDependencies": {
     "@apollo/react-testing": "^4.0.0",
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
-    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.3.0",
     "babel-eslint": "^10.1.0",
