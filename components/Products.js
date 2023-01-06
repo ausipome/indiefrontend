@@ -33,9 +33,9 @@ export const ALL_PRODUCTS_QUERY = gql`
 
 const ProductsListStyles = styled.div`
   margin: 0 auto;
-  width: 90%;
+  width: 96%;
   display: grid;
-  column-gap: 25px;
+  column-gap: 0px;
   row-gap: 25px;
   @media (min-width: 600px) {
     column-gap: 10%;
