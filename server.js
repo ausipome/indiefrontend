@@ -1,29 +1,43 @@
-const { createServer } = require('http');
+const express = require('express');
 const next = require('next');
-const absoluteUrl = require('next-absolute-url').default;
-const { parse } = require('url');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
+
 const handle = app.getRequestHandler();
 
-app.prepare().then(() =>
-  createServer((req, res) => {
-    const { url } = req;
-    const { protocol, host } = absoluteUrl(req);
+app
+  .prepare()
+  .then(() => {
+    const server = express();
 
-    if (!dev && protocol === 'http:') {
-      res.writeHead(301, {
-        Location: `https://${host}${url}`,
-      });
-      res.end();
-      return {};
-    }
+    server.use((req, res, next) => {
+      const hostname =
+        req.hostname === 'www.app.domain.com' ? 'app.domain.com' : req.hostname;
 
-    const parsedUrl = parse(url, true);
-    return handle(req, res, parsedUrl);
-  }).listen($PORT, (err) => {
-    if (err) throw err;
-    console.log('> Sever is running!');
+      if (
+        req.headers['x-forwarded-proto'] === 'http' ||
+        req.hostname === 'www.app.domain.com'
+      ) {
+        res.redirect(301, `https://${hostname}${req.url}`);
+        return;
+      }
+
+      res.setHeader(
+        'strict-transport-security',
+        'max-age=31536000; includeSubDomains; preload'
+      );
+      next();
+    });
+
+    server.get('*', (req, res) => handle(req, res));
+
+    server.listen(4242, (error) => {
+      if (error) throw error;
+      console.error('Listening on port 4242');
+    });
   })
-);
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
