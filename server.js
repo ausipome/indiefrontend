@@ -22,7 +22,7 @@ app.prepare().then(() =>
 
     const parsedUrl = parse(url, true);
     return handle(req, res, parsedUrl);
-  }).listen(3000, (err) => {
+  }).listen($PORT, (err) => {
     if (err) throw err;
     console.log('> Sever is running!');
   })
