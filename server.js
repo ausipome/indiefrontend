@@ -5,5 +5,5 @@ const app = express();
 
 app.use(secure);
 
-const port = $PORT || 3000;
+const port = $PORT;
 app.listen(port, () => console.log('Server listening.'));
