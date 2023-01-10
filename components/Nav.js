@@ -30,37 +30,56 @@ export default function NavMenu() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <NavStyles>
-            <Link href="/products">Marketplace</Link>
-            {user && (
-              <>
-                <Link href="/sell">Selling</Link>
-                <Link href="/orders">Buying</Link>
-                <Link href="/account">Account</Link>
-                <Link href="/contact">Contact</Link>
-                <SignOut />
+          <Nav className="me-auto">
+            <NavStyles>
+              <li>
+                <Link href="/products">Marketplace</Link>
+              </li>
 
-                <a type="button" onClick={openCart}>
-                  🛒
-                  <CartCount
-                    count={user.cart.reduce(
-                      (tally, cartItem) =>
-                        tally + (cartItem.product ? cartItem.quantity : 0),
-                      0
-                    )}
-                  />
-                </a>
-              </>
-            )}
-            {!user && (
-              <>
-                <Link href="/SignIn">Login</Link>
-                <Link href="/Register">Register</Link>
-                <Link href="/contact">Contact</Link>
-              </>
-            )}
-            <Cart />
-          </NavStyles>
+              {user && (
+                <>
+                  <li>
+                    <Link href="/sell">Selling</Link>
+                  </li>
+                  <li>
+                    <Link href="/orders">Buying</Link>
+                  </li>
+                  <li>
+                    <Link href="/account">Account</Link>
+                  </li>
+                  <li>
+                    <Link href="/contact">Contact</Link>
+                  </li>
+                  <SignOut />
+
+                  <a type="button" onClick={openCart}>
+                    🛒
+                    <CartCount
+                      count={user.cart.reduce(
+                        (tally, cartItem) =>
+                          tally + (cartItem.product ? cartItem.quantity : 0),
+                        0
+                      )}
+                    />
+                  </a>
+                </>
+              )}
+              {!user && (
+                <>
+                  <li>
+                    <Link href="/SignIn">Login</Link>
+                  </li>
+                  <li>
+                    <Link href="/Register">Register</Link>
+                  </li>
+                  <li>
+                    <Link href="/contact">Contact</Link>
+                  </li>
+                </>
+              )}
+              <Cart />
+            </NavStyles>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

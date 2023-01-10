@@ -7,18 +7,7 @@ import Footer from '../components/Footer';
 
 const MainImageStyle = styled.div`
   width: 100%;
-  height: 500px;
   margin-top: 12px;
-  margin-bottom: 12px;
-  @media (min-width: 400px) {
-    margin-bottom: 20px;
-  }
-  @media (min-width: 600px) {
-    margin-bottom: 140px;
-  }
-  @media (min-width: 800px) {
-    margin-bottom: 170px;
-  }
 `;
 
 const ImageControl = styled.div`
@@ -76,11 +65,28 @@ export default function IndexPage() {
           />
         </ImageControl>
       </MainImageStyle>
-      <Pagination page={page || 1} />
+      <h1
+        style={{
+          fontFamily: 'Comfortaa',
+          fontSize: '2.5em',
+          fontWeight: 'bold',
+          paddingBottom: '35px',
+          paddingTop: '35px',
+          backgroundColor: '#f5fbff',
+          marginBottom: '30px',
+          marginTop: '30px',
+          borderTop: 'solid thin #000000',
+          borderBottom: 'solid thin #000000',
+          textShadow: '1px 1px #000000',
+        }}
+      >
+        Marketplace
+      </h1>
       <Products page={page || 1} />
       <div style={{ marginBottom: '55px' }}>
         <Pagination page={page || 1} />
       </div>
+
       <Footer />
     </div>
   );

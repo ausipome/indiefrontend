@@ -23,22 +23,23 @@ export const ALL_PRODUCTS_QUERY_SELL = gql`
 
 const ProductsListStyles = styled.div`
   margin: 0 auto;
-  width: 90%;
+  width: 96%;
   display: grid;
-  column-gap: 25px;
+  column-gap: 0px;
   row-gap: 25px;
+  margin-bottom: 80px;
   @media (min-width: 600px) {
     column-gap: 10%;
     row-gap: 2%;
     grid-template-columns: 40% 40%;
-    margin-bottom: 200px;
+    margin-bottom: 220px;
   }
   @media (min-width: 900px) {
-    margin-top: 2%;
-    width: 70%;
-    column-gap: 7%;
+    padding-right: 2%;
+    column-gap: 3%;
     row-gap: 2%;
-    grid-template-columns: 28% 28% 28%;
+    grid-template-columns: 32% 32% 32%;
+    margin-bottom: 140px;
   }
 `;
 

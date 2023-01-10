@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Footer from '../components/Footer';
 
 const MainImageStyle = styled.div`
-  width: 85%;
-  height: 1070px;
-  margin-left: 7.5%;
+  width: 95%;
+  height: 1150px;
+  margin-left: 2.5%;
   margin-top: 12px;
   border-radius: 15px;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -13,6 +13,11 @@ const MainImageStyle = styled.div`
   border: 5px solid white;
   text-align: center;
   float: left;
+  @media (min-width: 650px) {
+    width: 85%;
+    margin-left: 7.5%;
+    height: 1000px;
+  }
   @media (min-width: 650px) {
     height: 600px;
   }

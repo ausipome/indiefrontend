@@ -9,8 +9,11 @@ const BottomNav = styled.div`
   position: fixed;
   bottom: 0px;
   left: 0px;
-  font-size: 0.7em;
+  font-size: 0.5em;
   padding-top: 7px;
+  @media (min-width: 350px) {
+    font-size: 0.8em;
+  }
   @media (min-width: 480px) {
     font-size: 1.2em;
   }

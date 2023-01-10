@@ -55,7 +55,7 @@ export default function Cart() {
     <CartStyles open={cartOpen}>
       <header>
         <Supreme>Shopping Cart</Supreme>
-        <CloseButton onClick={closeCart}>&times;</CloseButton>
+        <CloseButton onClick={closeCart}>❌</CloseButton>
       </header>
       <ul>
         {me.cart.map((cartItem) => (

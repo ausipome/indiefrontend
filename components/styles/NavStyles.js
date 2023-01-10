@@ -3,13 +3,22 @@ import styled from 'styled-components';
 const NavStyles = styled.ul`
   margin: 0;
   padding: 0;
-  display: flex;
   justify-self: end;
   font-size: 1.1em;
   text-align: right;
+  li {
+    width: 100%;
+    list-style-type: none;
+  }
+  @media (min-width: 991px) {
+    display: flex;
+    li {
+      width: fit-content;
+    }
+  }
   a,
   button {
-    padding: 1rem 3rem;
+    padding: 1rem 1.1rem;
     display: flex;
     align-items: center;
     position: relative;
@@ -19,10 +28,6 @@ const NavStyles = styled.ul`
     border: 0;
     color: #0077a0;
     cursor: pointer;
-    @media (max-width: 700px) {
-      font-size: 10px;
-      padding: 0 10px;
-    }
     &:before {
       content: '';
       width: 2px;

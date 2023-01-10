@@ -41,14 +41,14 @@ const ProductsListStyles = styled.div`
     column-gap: 10%;
     row-gap: 2%;
     grid-template-columns: 40% 40%;
-    margin-bottom: 65px;
+    margin-bottom: 75px;
   }
   @media (min-width: 900px) {
-    margin-top: 1%;
-    width: 80%;
-    column-gap: 7%;
-    row-gap: 4%;
-    grid-template-columns: 30% 30% 30%;
+    padding-right: 2%;
+    column-gap: 3%;
+    row-gap: 2%;
+    grid-template-columns: 32% 32% 32%;
+    margin-bottom: 45px;
   }
 `;
 
@@ -62,12 +62,10 @@ export default function Products({ page }) {
   if (loading) return <LoadBar load={loading} />;
   if (error) return <p>Error: {error.message}</p>;
   return (
-    <div>
-      <ProductsListStyles>
-        {data.products.map((product) => (
-          <Product key={product.id} product={product} pageType="Products" />
-        ))}
-      </ProductsListStyles>
-    </div>
+    <ProductsListStyles>
+      {data.products.map((product) => (
+        <Product key={product.id} product={product} pageType="Products" />
+      ))}
+    </ProductsListStyles>
   );
 }

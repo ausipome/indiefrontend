@@ -3,13 +3,8 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
 
 const GlobalStyles = createGlobalStyle`
-@font-face{
-  font-family: Arial, Helvetica, sans-serif;
-  format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
 html{
+  padding-bottom: 80px;
   --red:#ff0000;
   --black:#393939;
   --grey:#3A3A3A;
@@ -24,7 +19,7 @@ html{
   box-sizing: inherit;
 }
 body{
-  font-family: Arial , --apple-system, 
+  font-family: Roboto;
   BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
   Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 0;
@@ -48,7 +43,6 @@ button{
 const InnerStyles = styled.div`
   width: 100%;
   margin: 0 auto;
-  padding: 25px;
 `;
 
 export default function Page({ children }) {

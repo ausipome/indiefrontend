@@ -53,6 +53,7 @@ function countItemsInAnOrder(order) {
 export default function OrdersPage() {
   const theUser = useUser();
   const postcode = theUser?.postcode;
+  console.log(postcode);
   const theId = theUser?.id;
   const { data, error, loading } = useQuery(USER_ORDERS_QUERY, {
     variables: {
@@ -68,7 +69,6 @@ export default function OrdersPage() {
         <Head>
           <title>Your Orders ({orders.length})</title>
         </Head>
-
         {orders.length === 0 && (
           <div style={{ textAlign: 'center' }}>
             <h2 style={{ textAlign: 'center' }}>
@@ -91,58 +91,100 @@ export default function OrdersPage() {
             />
           </div>
         )}
-        <>
+        {orders.length > 0 && postcode === '' && (
+          <h2
+            style={{
+              color: 'red',
+              fontWeight: 'normal',
+              textAlign: 'center',
+              marginTop: '18px',
+            }}
+          >
+            Please ensure your delivery address is up to date in your account!
+          </h2>
+        )}
+        <div>
           {orders.length === 1 && (
-            <h2 style={{ textAlign: 'center' }}>
-              You have placed {orders.length} order!
-            </h2>
-          )}
-          {orders.length > 1 && (
-            <h2 style={{ textAlign: 'center' }}>
-              You have placed {orders.length} orders!
-            </h2>
-          )}
-          {(orders.length > 0 && postcode !== null) ||
-            (postcode !== '' && (
+            <div>
               <h2
                 style={{
-                  color: 'red',
-                  fontWeight: 'normal',
                   textAlign: 'center',
+                  marginTop: '18px',
+                  marginBottom: '18px',
                 }}
               >
-                Please ensure your delivery address is up to date in your
-                account!
+                You have placed {orders.length} order!
               </h2>
-            ))}
-          <OrderUl>
-            {orders.map((order) => (
-              <OrderItemStyles key={order.id}>
-                <Link href={`/order/${order.id}`}>
-                  <a>
-                    <div className="order-meta">
-                      <p>{countItemsInAnOrder(order)} Items</p>
-                      <p>
-                        {order.items.length} Product
-                        {order.items.length === 1 ? '' : 's'}
-                      </p>
-                      <p>{formatMoney(order.total)}</p>
-                    </div>
-                    <div className="images">
-                      {order.items.map((item) => (
-                        <img
-                          key={`image-${item.id}`}
-                          src={item.photo?.image?.publicUrlTransformed}
-                          alt={item.name}
-                        />
-                      ))}
-                    </div>
-                  </a>
-                </Link>
-              </OrderItemStyles>
-            ))}
-          </OrderUl>
-        </>
+              <OrderUl style={{ width: '40%' }}>
+                {orders.map((order) => (
+                  <OrderItemStyles key={order.id}>
+                    <Link href={`/order/${order.id}`}>
+                      <a>
+                        <div className="order-meta">
+                          <p>{countItemsInAnOrder(order)} Items</p>
+                          <p>
+                            {order.items.length} Product
+                            {order.items.length === 1 ? '' : 's'}
+                          </p>
+                          <p>{formatMoney(order.total)}</p>
+                        </div>
+                        <div className="images">
+                          {order.items.map((item) => (
+                            <img
+                              key={`image-${item.id}`}
+                              src={item.photo?.image?.publicUrlTransformed}
+                              alt={item.name}
+                            />
+                          ))}
+                        </div>
+                      </a>
+                    </Link>
+                  </OrderItemStyles>
+                ))}
+              </OrderUl>
+            </div>
+          )}
+          {orders.length > 1 && (
+            <div>
+              <h2
+                style={{
+                  textAlign: 'center',
+                  marginTop: '18px',
+                  marginBottom: '18px',
+                }}
+              >
+                You have placed {orders.length} orders!
+              </h2>
+              <OrderUl>
+                {orders.map((order) => (
+                  <OrderItemStyles key={order.id}>
+                    <Link href={`/order/${order.id}`}>
+                      <a>
+                        <div className="order-meta">
+                          <p>{countItemsInAnOrder(order)} Items</p>
+                          <p>
+                            {order.items.length} Product
+                            {order.items.length === 1 ? '' : 's'}
+                          </p>
+                          <p>{formatMoney(order.total)}</p>
+                        </div>
+                        <div className="images">
+                          {order.items.map((item) => (
+                            <img
+                              key={`image-${item.id}`}
+                              src={item.photo?.image?.publicUrlTransformed}
+                              alt={item.name}
+                            />
+                          ))}
+                        </div>
+                      </a>
+                    </Link>
+                  </OrderItemStyles>
+                ))}
+              </OrderUl>
+            </div>
+          )}
+        </div>
       </div>
       <Footer />
     </PleaseSignIn>

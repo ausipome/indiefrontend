@@ -19,22 +19,23 @@ export default function Pagination({ page }) {
   const count = data.productsCount;
   const pageCount = Math.ceil(count / perPage);
   return (
-    <PaginationStyles>
-      <Head>
-        <title>
-          Indie Bubba - Page {page} of {pageCount}
-        </title>
-      </Head>
-      <Link href={`/products/${page - 1}`}>
-        <a aria-disabled={page <= 1}>← Prev</a>
-      </Link>
-      <p>
+    <>
+      <p style={{ color: 'red' }}>
         Page {page} of {pageCount}
       </p>
-      <p>{count} Items Total</p>
-      <Link href={`/products/${page + 1}`}>
-        <a aria-disabled={page >= pageCount}>Next →</a>
-      </Link>
-    </PaginationStyles>
+      <PaginationStyles>
+        <Head>
+          <title>
+            Indie Bubba - Page {page} of {pageCount}
+          </title>
+        </Head>
+        <Link href={`/products/${page - 1}`}>
+          <a aria-disabled={page <= 1}>← Prev</a>
+        </Link>
+        <Link href={`/products/${page + 1}`}>
+          <a aria-disabled={page >= pageCount}>Next →</a>
+        </Link>
+      </PaginationStyles>
+    </>
   );
 }
