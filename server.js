@@ -32,9 +32,9 @@ app
 
     server.get('*', (req, res) => handle(req, res));
 
-    server.listen(4242, (error) => {
+    server.listen($PORT, (error) => {
       if (error) throw error;
-      console.error('Listening on port 4242');
+      console.error('Listening');
     });
   })
   .catch((error) => {
