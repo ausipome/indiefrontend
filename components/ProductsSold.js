@@ -45,7 +45,7 @@ const ProductsListStyles = styled.div`
   width: 96%;
   display: grid;
   column-gap: 0px;
-  row-gap: 25px;
+  row-gap: 35px;
   margin-bottom: 80px;
   @media (min-width: 600px) {
     column-gap: 10%;

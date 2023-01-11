@@ -13,6 +13,7 @@ const ButtonStyles = styled.button`
   font-weight: 600;
   padding: 0.5rem 1.2rem;
   margin-right: 7px;
+  border-radius: 15px;
 `;
 
 const UPDATE_ORDER_MUTATION = gql`

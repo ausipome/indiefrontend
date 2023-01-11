@@ -20,7 +20,10 @@ export default function AddToCart({ id }) {
   if (!me)
     return (
       <Link href="/SignIn">
-        <button type="button" style={{ fontSize: '1.15em' }}>
+        <button
+          type="button"
+          style={{ fontSize: '1.15em', borderRadius: '15px' }}
+        >
           Login to Add To Cart 🛒
         </button>
       </Link>
@@ -30,7 +33,7 @@ export default function AddToCart({ id }) {
       disabled={loading}
       type="button"
       onClick={addToCart}
-      style={{ fontSize: '1.15em' }}
+      style={{ fontSize: '1.15em', borderRadius: '15px' }}
     >
       Add{loading && 'ing'} To Cart 🛒
     </button>

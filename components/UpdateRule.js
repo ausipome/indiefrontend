@@ -9,9 +9,16 @@ const RuleStyles = styled.div`
   line-height: 1.5;
   font-weight: 600;
   color: #015268;
-  width: 60%;
-  margin-left: 20%;
+  width: 100%;
   margin-bottom: 40px;
+  @media (min-width: 600px) {
+    width: 80%;
+    margin-left: 10%;
+  }
+  @media (min-width: 900px) {
+    width: 60%;
+    margin-left: 20%;
+  }
 `;
 
 export default function SellRule() {

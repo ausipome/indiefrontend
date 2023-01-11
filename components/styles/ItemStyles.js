@@ -2,12 +2,15 @@ import styled from 'styled-components';
 
 const ItemStyles = styled.div`
   background: white;
-  border: thin solid #eeeeee;
+  border: thin solid #000000;
   box-shadow: 2px 2px #efefef;
   border-radius: 15px;
   position: relative;
   display: flex;
   flex-direction: column;
+  @media (min-width: 600px) {
+    border: thin solid #eeeeee;
+  }
   img {
     width: 100%;
     height: 400px;

@@ -13,10 +13,6 @@ import { useUser } from './User';
 
 const ProductStyles = styled.div`
   display: grid;
-  font-family: Arial;
-  grid-auto-columns: 1fr 1fr;
-  grid-auto-flow: column;
-  max-width: var(--maxWidth);
   justify-content: center;
   align-items: top;
   gap: 2rem;
@@ -77,16 +73,13 @@ export default function SingleProduct({ id }) {
           alt={Product.name}
         />
       </div>
-      <div
-        className="details"
-        style={{ position: 'relative', height: '600px' }}
-      >
+      <div className="details">
         <h2>{Product.name}</h2>
         <h4>{Product.description}</h4>
         {Product.user.id !== user.id && <AddToCartButton id={Product.id} />}
 
         {Product.user.id === user.id && (
-          <div style={{ position: 'absolute', bottom: '0px' }}>
+          <div style={{ marginTop: '15px', textAlign: 'right' }}>
             <Link
               href={{
                 pathname: '/update',
