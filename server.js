@@ -9,7 +9,10 @@ const port = process.env.PORT;
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    console.log(req.url);
+    const myURL = new URL(window.location.href);
+    console.log(myURL.href);
+    console.log(myURL.toString());
+
     const parsedUrl = parse(req.url, true);
     if (!dev && req.headers['x-forwarded-proto'] != 'https') {
       const { host } = parse(process.env.HOSTNAME);
