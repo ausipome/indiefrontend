@@ -12,7 +12,7 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     if (!dev && req.headers['x-forwarded-proto'] != 'https') {
       res.writeHead(302, {
-        Location: `https://indiebubba.com/${req.url}`,
+        Location: `https://indiebubba.com${req.url}`,
       });
       res.end();
     } else {
