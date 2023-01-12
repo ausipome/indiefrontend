@@ -87,9 +87,11 @@ export default function ProductsSold() {
             borderBottom: 'solid thin #015268',
             marginTop: '3rem',
             marginBottom: '3rem',
+            padding: '0.5em',
+            fontSize: '2.5em',
           }}
         >
-          Sold
+          I've Sold
         </h2>
       )}
       <ProductsListStyles>

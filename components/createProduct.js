@@ -63,7 +63,8 @@ export default function CreateProduct() {
       <h2
         style={{
           textAlign: 'center',
-
+          padding: '0.5em',
+          fontSize: '2em',
           padding: '12px',
         }}
       >

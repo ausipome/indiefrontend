@@ -69,6 +69,8 @@ export default function ProductsSell() {
             borderBottom: 'solid thin #015268',
             marginTop: '3rem',
             marginBottom: '3rem',
+            padding: '0.5em',
+            fontSize: '2.5em',
           }}
         >
           I'm Selling
