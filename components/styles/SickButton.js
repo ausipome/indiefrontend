@@ -6,7 +6,7 @@ const SickButton = styled.button`
     #0077a0 0%,
     #fde6ff 40%
   ) !important;
-  color: red !important;
+  color: black !important;
   font-weight: 500 !important;
   border: 0 !important;
   border-radius: 0 !important;
