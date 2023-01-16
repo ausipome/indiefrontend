@@ -13,8 +13,6 @@ const OrderStyles = styled.div`
     background-image: linear-gradient(to right, #0077a0 0%, #fde6ff 80%);
   }
   & > p {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
     margin: 0;
     border-bottom: 1px solid var(--offWhite);
     span {
@@ -27,16 +25,28 @@ const OrderStyles = styled.div`
   }
   .order-item {
     border-bottom: 1px solid var(--offWhite);
-    display: grid;
-    grid-template-columns: 300px 1fr;
     align-items: center;
     grid-gap: 2rem;
     margin: 2rem 0;
     padding-bottom: 2rem;
+    @media (min-width: 750px) {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+    }
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-top: thin solid #000000;
+      @media (min-width: 750px) {
+        border-top: none;
+      }
+    }
+  }
+  .item-details {
+    margin-top: 22px;
+    @media (min-width: 750px) {
+      margin-top: 0px;
     }
   }
 `;
