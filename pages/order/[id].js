@@ -69,22 +69,32 @@ export default function SingleOrderPage({ query }) {
           <Head>
             <title>Indie Bubba - {order.id}</title>
           </Head>
-          <p>
-            <span>Order Id:</span>
-            <span>{order.id}</span>
-          </p>
-          <p>
-            <span>Order Date:</span>
-            <span>{order.date}</span>
-          </p>
-          <p>
-            <span>Order Total:</span>
-            <span>{formatMoney(order.total)}</span>
-          </p>
-          <p>
-            <span>Item Count:</span>
-            <span>{order.items.length}</span>
-          </p>
+          <div style={{ marginLeft: '5%', marginTop: '5%' }}>
+            <p>
+              <span>Order Id: </span>
+              <span style={{ color: 'black' }}>{order.id}</span>
+            </p>
+            <p>
+              <span>Order Date: </span>
+              <span style={{ color: 'black' }}>{order.date}</span>
+            </p>
+            <p>
+              <span>Order Total: </span>
+              <span style={{ color: 'black' }}>{formatMoney(order.total)}</span>
+            </p>
+            <p>
+              <span>Item Count: </span>
+              <span style={{ color: 'black' }}>{order.items.length}</span>
+            </p>
+            <p style={{ color: 'red', paddingRight: '12px' }}>
+              Please be aware, when purchasing multiple items, you are most
+              likely purchasing from different sellers.
+              <br />
+              Delivery times may be slightly different.
+              <br /> If there is an issue with one of the items, please ensure
+              you contact the correct seller!
+            </p>
+          </div>
           <div className="items">
             {order.items.map((item) => (
               <div className="order-item" key={item.id}>
