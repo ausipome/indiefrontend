@@ -46,7 +46,6 @@ export default function SignIn() {
     variables: inputs,
     async onCompleted(data) {
       const emailCheck = data?.authenticateUserWithPassword?.item?.confirmed;
-      console.log(emailCheck);
       if (emailCheck === 'no') {
         signout();
         document.getElementById('logMessage').innerHTML =

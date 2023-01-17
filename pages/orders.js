@@ -53,7 +53,6 @@ function countItemsInAnOrder(order) {
 export default function OrdersPage() {
   const theUser = useUser();
   const postcode = theUser?.postcode;
-  console.log(postcode);
   const theId = theUser?.id;
   const { data, error, loading } = useQuery(USER_ORDERS_QUERY, {
     variables: {

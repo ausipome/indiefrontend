@@ -40,7 +40,14 @@ export default function SignUpStripe() {
   if (data?.stripeUser) {
     return (
       <>
-        <h2 style={{ color: 'red', fontWeight: 'normal', textAlign: 'center' }}>
+        <h2
+          style={{
+            color: 'red',
+            fontWeight: 'normal',
+            textAlign: 'center',
+            padding: '12px',
+          }}
+        >
           Welcome to Indie Bubba, {data.stripeUser.email} 😊 <br /> Please
           confirm your email address via the link which you have been sent!
         </h2>

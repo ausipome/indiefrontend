@@ -139,7 +139,6 @@ export default function UpdateProduct({ id }) {
           if (inputs.image !== undefined) {
             updateImage();
           }
-          console.log(inputs.image);
 
           Router.push({
             pathname: `/product/${res.data.updateProduct.id}`,

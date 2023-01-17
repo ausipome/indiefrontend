@@ -30,14 +30,12 @@ export default function SellPage() {
       .then((res) => res.json())
       .then((data) => {
         setData(data.account.capabilities.transfers);
-        console.log(data);
       })
       .then(
         fetch(`/api/link/${acc}`)
           .then((res) => res.json())
           .then((dataLink) => {
             setDataLink(dataLink.accountLink.url);
-            console.log(dataLink);
             setLoading(false);
           })
       );

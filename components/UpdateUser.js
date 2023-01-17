@@ -34,7 +34,6 @@ const UPDATE_USER_MUTATION = gql`
 export default function UpdateUser() {
   const theUser = useUser();
   const id = theUser?.id;
-  console.log(id);
 
   const [updateUser, { data, error, loading }] =
     useMutation(UPDATE_USER_MUTATION);
