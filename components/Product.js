@@ -373,7 +373,7 @@ export default function Product({ product, pageType }) {
       <PriceTag>
         {formatMoney(product.price)}
         <br />
-        <span>Inc Postage</span>
+        <span>Inc UK Postage</span>
       </PriceTag>
       <StatusTag>{product.condition}</StatusTag>
       <p style={{ color: '#015268' }}>{product.description}</p>
