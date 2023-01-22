@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { loadStripe } from '@stripe/stripe-js';
+
 import {
   CardElement,
   Elements,
@@ -11,9 +12,10 @@ import nProgress from 'nprogress';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { Router, useRouter } from 'next/dist/client/router';
+import { useUser, CURRENT_USER_QUERY } from './User';
 import SickButton from './styles/SickButton';
 import { useCart } from '../lib/cartState';
-import { CURRENT_USER_QUERY } from './User';
+
 import { USER_ORDERS_QUERY } from '../pages/orders';
 import { ALL_PRODUCTS_QUERY } from './Products';
 import { PAGINATION_QUERY } from './Pagination';
@@ -42,9 +44,13 @@ const CREATE_ORDER_MUTATION = gql`
   }
 `;
 
-const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+const promise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 function CheckoutForm() {
+  const theUser = useUser();
+  let clientSecret = '';
+  let succeeded = false;
+  let chargeId = '';
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
@@ -66,43 +72,69 @@ function CheckoutForm() {
       ],
     }
   );
+
   async function handleSubmit(e) {
     // 1. Stop the form from submitting and turn the loader one
     e.preventDefault();
     setLoading(true);
     // 2. Start the page transition
     nProgress.start();
-    // 3. Create the payment method via stripe (Token comes back here if successful)
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: elements.getElement(CardElement),
-    });
-    // 4. Handle any errors from stripe
-    if (error) {
-      setError(error);
-      nProgress.done();
-      setLoading(false);
-      return; // stops the checkout from happening
-    }
-    // 5. Send the token from step 3 to our keystone server, via a custom mutation!
-    const order = await checkout({
-      variables: {
-        token: paymentMethod.id,
-      },
-    });
-    // 6. Change the page to view the order
-    router.push({
-      pathname: `/order/[id]`,
-      query: {
-        id: order.data.checkout.id,
-      },
-    });
-    // 7. Close the cart
-    closeCart();
 
-    // 8. turn the loader off
-    setLoading(false);
-    nProgress.done();
+    // 3. Calculate Total
+    const cartItems = theUser.cart.filter((cartItem) => cartItem.product);
+    const amount = cartItems.reduce(function (tally, cartItem) {
+      return tally + cartItem.quantity * cartItem.product.price;
+    }, 0);
+
+    // 4. create payment intent via server and returns client secret
+
+    fetch(`/api/payIntent/${amount}`)
+      .then((res) => res.json())
+      .then((data) => {
+        clientSecret = data.clientSecret;
+      })
+      .then(async () => {
+        console.log(clientSecret);
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        });
+        if (payload.error) {
+          setError(`Payment failed ${payload.error.message}`);
+          nProgress.done();
+          setLoading(false);
+        } else {
+          console.log(payload.paymentIntent.id);
+          chargeId = payload.paymentIntent.id;
+          setError(null);
+          succeeded = true;
+        }
+      })
+      .then(async () => {
+        console.log(succeeded);
+        if (succeeded === true) {
+          // 5. If payment complete send details to backend to complete checkout
+          const order = await checkout({
+            variables: {
+              token: chargeId,
+            },
+          });
+          // 6. Change the page to view the order
+          router.push({
+            pathname: `/order/[id]`,
+            query: {
+              id: order.data.checkout.id,
+            },
+          });
+          // 7. Close the cart
+          closeCart();
+
+          // 8. turn the loader off
+          setLoading(false);
+          nProgress.done();
+        }
+      });
   }
 
   return (
@@ -118,7 +150,7 @@ function CheckoutForm() {
 
 function Checkout() {
   return (
-    <Elements stripe={stripeLib}>
+    <Elements stripe={promise}>
       <CheckoutForm />
     </Elements>
   );
