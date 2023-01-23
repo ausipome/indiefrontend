@@ -37,18 +37,19 @@ const ProductsListStyles = styled.div`
   display: grid;
   column-gap: 0px;
   row-gap: 35px;
+  margin-bottom: 20px;
   @media (min-width: 600px) {
     column-gap: 10%;
     row-gap: 2%;
     grid-template-columns: 40% 40%;
-    margin-bottom: 75px;
+    margin-bottom: 450px;
   }
   @media (min-width: 900px) {
     padding-right: 2%;
     column-gap: 3%;
     row-gap: 2%;
     grid-template-columns: 32% 32% 32%;
-    margin-bottom: 45px;
+    margin-bottom: 200px;
   }
 `;
 

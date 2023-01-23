@@ -47,7 +47,7 @@ export default function CreateProduct() {
       variables: {
         name: inputs.name,
         description: inputs.description,
-        price: parseFloat(inputs.price) * 100,
+        price: Math.ceil(parseFloat(inputs.price) * 100),
         image: inputs.image,
         condition: inputs.condition,
       },

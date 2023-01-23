@@ -66,7 +66,8 @@ export default function SellRule() {
           Listing your items on Indie Bubba is free! <br /> You will be charged
           5% of the total sale price of your listing, only if it sells.
           <br />
-          Postage must be included in your sale price!
+          UK Postage <span style={{ color: 'red' }}>MUST</span> be included in
+          your sale price!
         </h3>
         <h2 style={{ textAlign: 'center', color: 'pink' }}>Happy selling 😁</h2>
       </div>

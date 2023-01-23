@@ -11,7 +11,7 @@ export default async (req, res) => {
 
   const payouts = await stripeConfig.payouts.list({
     stripeAccount: id,
-    limit: 3,
+    limit: 5,
   });
 
   if (!payouts) {

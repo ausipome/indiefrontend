@@ -104,6 +104,7 @@ function CheckoutForm() {
           setError(`Payment failed ${payload.error.message}`);
           nProgress.done();
           setLoading(false);
+          succeeded = false;
         } else {
           console.log(payload.paymentIntent.id);
           chargeId = payload.paymentIntent.id;
@@ -133,6 +134,8 @@ function CheckoutForm() {
           // 8. turn the loader off
           setLoading(false);
           nProgress.done();
+        } else if (succeeded === false) {
+          document.getElementById('errorMessage').innerHTML = 'Card Declined!';
         }
       });
   }
@@ -140,7 +143,14 @@ function CheckoutForm() {
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
       <LoadBar load={loading} />
-      {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
+      {error && (
+        <p
+          id="errorMessage"
+          style={{ fontSize: 18, color: 'red', textAlign: 'center' }}
+        >
+          {error.message}
+        </p>
+      )}
       {graphQLError && <p style={{ fontSize: 12 }}>{graphQLError.message}</p>}
       <CardElement />
       <SickButton className="nounderline">Pay Now</SickButton>
