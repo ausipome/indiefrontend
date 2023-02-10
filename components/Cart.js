@@ -30,7 +30,7 @@ function CartItem({ cartItem }) {
     <CartItemStyles>
       <img
         width="100"
-        src={product.photo.image.publicUrlTransformed}
+        src={process.env.NEXT_PUBLIC_IMAGE_PATH + product?.photo}
         alt={product.name}
       />
       <div>

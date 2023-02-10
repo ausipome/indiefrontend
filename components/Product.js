@@ -66,7 +66,7 @@ export default function Product({ product, pageType }) {
     return (
       <ItemStyles>
         <img
-          src={product?.photo?.image?.publicUrlTransformed}
+          src={process.env.NEXT_PUBLIC_IMAGE_PATH + product?.photo}
           alt={product.name}
           style={{
             borderBottom: 'solid thin #eeeeee',
@@ -107,7 +107,7 @@ export default function Product({ product, pageType }) {
     return (
       <ItemStyles>
         <img
-          src={product?.photo?.image?.publicUrlTransformed}
+          src={process.env.NEXT_PUBLIC_IMAGE_PATH + product?.photo}
           alt={product.name}
           style={{
             borderBottom: 'solid thin #eeeeee',
@@ -302,7 +302,7 @@ export default function Product({ product, pageType }) {
     return (
       <ItemStyles>
         <img
-          src={product?.photo?.image?.publicUrlTransformed}
+          src={process.env.NEXT_PUBLIC_IMAGE_PATH + product?.photo}
           alt={product.name}
           style={{
             borderBottom: 'solid thin #eeeeee',
@@ -359,7 +359,7 @@ export default function Product({ product, pageType }) {
   return (
     <ItemStyles>
       <img
-        src={product?.photo?.image?.publicUrlTransformed}
+        src={process.env.NEXT_PUBLIC_IMAGE_PATH + product?.photo}
         alt={product.name}
         style={{
           borderBottom: 'solid thin #eeeeee',

@@ -16,6 +16,16 @@ const RuleStyles = styled.div`
   }
 `;
 
+const NextRuleStyles = styled.div`
+  margin: 0 auto;
+  width: 90%;
+  padding-top: 12px;
+  line-height: 2em;
+  @media (min-width: 600px) {
+    width: 60%;
+  }
+`;
+
 export default function SellRule() {
   return (
     <RuleStyles>
@@ -23,35 +33,44 @@ export default function SellRule() {
         Sell on <span style={{ color: 'pink' }}>Indie Bubba</span> in 3 simple
         steps...
       </h2>
-      <div
-        style={{
-          margin: '0 auto',
-          width: '70%',
-          paddingTop: '12px',
-          lineHeight: '2em',
-        }}
-      >
+      <NextRuleStyles>
         <ul>
           <li>
-            Ensure items are good quality!{' '}
-            <span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>
-              Clothes must not be ripped or stained. The buyer has full rights
-              to reject poor quality items and will be returned to the seller at
-              their own cost, for a full refund.
+            <span style={{ fontSize: '1.3em' }}>Group it! </span>
+            <span
+              style={{
+                fontStyle: 'italic',
+                fontWeight: 'normal',
+              }}
+            >
+              Because postage must be included in your sale price, it’s much
+              better to group items together. <br />
+              They don’t have to be the same type of item, but it is better if
+              they are all the same size.
             </span>
           </li>
           <li>
-            Photograph the item/s.{' '}
-            <span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>
+            <span style={{ fontSize: '1.3em' }}>Snap it! </span>
+            <span
+              style={{
+                fontStyle: 'italic',
+                fontWeight: 'normal',
+              }}
+            >
               You only get one photo per listing, so be sure to make it count!{' '}
               <br /> A great photo makes you stand out from the rest.
             </span>
           </li>
           <li>
-            Complete and submit the simple form below.{' '}
-            <span style={{ fontStyle: 'italic', fontWeight: 'normal' }}>
-              Keep names and descriptions brief and to the point! It will help
-              sell your item quickly.
+            <span style={{ fontSize: '1.3em' }}>Sell it! </span>
+            <span
+              style={{
+                fontStyle: 'italic',
+                fontWeight: 'normal',
+              }}
+            >
+              Fill out the simple form below. <br /> Keep names and descriptions
+              brief and to the point! It will help sell your item quickly.
             </span>
           </li>
         </ul>
@@ -64,13 +83,13 @@ export default function SellRule() {
           }}
         >
           Listing your items on Indie Bubba is free! <br /> You will be charged
-          5% of the total sale price of your listing, only if it sells.
+          5% of the total sale price of your listing, ONLY if it sells.
           <br />
           UK Postage <span style={{ color: 'red' }}>MUST</span> be included in
           your sale price!
         </h3>
         <h2 style={{ textAlign: 'center', color: 'pink' }}>Happy selling 😁</h2>
-      </div>
+      </NextRuleStyles>
     </RuleStyles>
   );
 }

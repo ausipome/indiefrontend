@@ -11,12 +11,7 @@ export const ALL_PRODUCTS_QUERY_SELL = gql`
       name
       price
       description
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
+      photo
     }
   }
 `;

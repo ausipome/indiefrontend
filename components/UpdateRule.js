@@ -33,7 +33,7 @@ export default function SellRule() {
           color: 'red',
         }}
       >
-        If you are not updating the photo then please leave this field blank!
+        If you are not updating the image, then please ignore this field!
       </h3>
       <h2 style={{ textAlign: 'center', color: 'pink' }}>Happy selling 😁</h2>
     </RuleStyles>

@@ -17,11 +17,7 @@ const SEARCH_PRODUCTS_QUERY = gql`
     ) {
       id
       name
-      photo {
-        image {
-          publicUrlTransformed
-        }
-      }
+      photo
     }
   }
 `;
@@ -82,7 +78,7 @@ export default function Search() {
               highlighted={index === highlightedIndex}
             >
               <img
-                src={item.photo.image.publicUrlTransformed}
+                src={process.env.NEXT_PUBLIC_IMAGE_PATH + item?.photo}
                 alt={item.name}
                 width="50"
               />

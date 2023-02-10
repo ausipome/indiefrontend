@@ -30,7 +30,7 @@ const DisplayError = ({ error }) => {
         <p data-test="graphql-error">
           <strong>Oh Dear!</strong>
           {error.message.replace('GraphQL error: ', '')}
-          <strong>Did you enter the correct details?</strong>
+          <strong> Did you enter the correct details?</strong>
         </p>
       </ErrorStyles>
     ));
@@ -40,7 +40,7 @@ const DisplayError = ({ error }) => {
       <p data-test="graphql-error">
         <strong>Oh Dear!</strong>
         {error.message.replace('GraphQL error: ', '')}
-        <strong>Did you enter the correct details?</strong>
+        <strong> Did you enter the correct details?</strong>
       </p>
     </ErrorStyles>
   );

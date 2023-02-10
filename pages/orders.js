@@ -30,11 +30,7 @@ export const USER_ORDERS_QUERY = gql`
         description
         price
         quantity
-        photo {
-          image {
-            publicUrlTransformed
-          }
-        }
+        photo
       }
     }
   }
@@ -131,7 +127,9 @@ export default function OrdersPage() {
                           {order.items.map((item) => (
                             <img
                               key={`image-${item.id}`}
-                              src={item.photo?.image?.publicUrlTransformed}
+                              src={
+                                process.env.NEXT_PUBLIC_IMAGE_PATH + item?.photo
+                              }
                               alt={item.name}
                             />
                           ))}
@@ -171,7 +169,9 @@ export default function OrdersPage() {
                           {order.items.map((item) => (
                             <img
                               key={`image-${item.id}`}
-                              src={item.photo?.image?.publicUrlTransformed}
+                              src={
+                                process.env.NEXT_PUBLIC_IMAGE_PATH + item.photo
+                              }
                               alt={item.name}
                             />
                           ))}

@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { useState } from 'react';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import useForm from '../lib/useForm';
@@ -11,8 +12,8 @@ const CREATE_PRODUCT_MUTATION = gql`
     $name: String!
     $description: String!
     $price: Int!
-    $image: Upload
     $condition: String!
+    $photo: String!
   ) {
     createProduct(
       data: {
@@ -21,7 +22,7 @@ const CREATE_PRODUCT_MUTATION = gql`
         price: $price
         condition: $condition
         status: "DRAFT"
-        photo: { create: { image: $image, altText: $name } }
+        photo: $photo
       }
     ) {
       id
@@ -33,6 +34,42 @@ const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function CreateProduct() {
+  const [theFile, setTheFile] = useState('');
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      const formData = new FormData();
+      formData.append('image', e.target.files[0]);
+      const theCode = process.env.NEXT_PUBLIC_IMAGE_CODE;
+      formData.append('code', theCode);
+      formData.append('oldFile', theFile);
+
+      fetch(
+        `https://theimagesofindiebubba.toomanyideas.co.uk/imageprocess.php`,
+        {
+          method: 'Post',
+          referrerPolicy: 'no-referrer-when-downgrade',
+          body: formData,
+        }
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.code === 1) {
+            setTheFile(result.file);
+            document.getElementById(
+              'fileText'
+            ).innerHTML = `✅ ${result.realName} Uploaded!`;
+          } else if (result.code === 2) {
+            document.getElementById(
+              'fileText'
+            ).innerHTML = `❌ Image Upload Failed! ${result.message}`;
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  };
+
   const { inputs, handleChange, clearForm, resetForm } = useForm({
     image: '',
     name: 'Set of 5 baby grow - Size 3-6 month.',
@@ -41,15 +78,15 @@ export default function CreateProduct() {
       '5 animal themed baby grow in size 3-6 month. Only worn a couple of times each as grew too quickly. All in very good condition.',
   });
 
-  const [createProduct, { loading, error, data }] = useMutation(
+  const [createProduct, { loading, error }] = useMutation(
     CREATE_PRODUCT_MUTATION,
     {
       variables: {
         name: inputs.name,
         description: inputs.description,
         price: Math.ceil(parseFloat(inputs.price) * 100),
-        image: inputs.image,
         condition: inputs.condition,
+        photo: theFile,
       },
       refetchQueries: [
         { query: ALL_PRODUCTS_QUERY_SELL },
@@ -99,16 +136,35 @@ export default function CreateProduct() {
           &nbsp;
         </span>
         <fieldset disabled={loading} aria-busy={loading}>
-          <label htmlFor="image">
-            Image
+          <label
+            htmlFor="image"
+            title="Upload Image"
+            style={{
+              fontFamily: 'Arial',
+              border: 'thin solid #000000',
+              width: '180px',
+              cursor: 'pointer',
+              marginTop: '12px',
+              textAlign: 'center',
+              padding: '7px',
+              background: '#fde6ff',
+              color: '#015268',
+              fontSize: '1.2em',
+              display: 'inline-block',
+              marginRight: '12px',
+            }}
+          >
+            Upload Image 🚀
             <input
+              style={{ display: 'none' }}
               required
               type="file"
               id="image"
               name="image"
-              onChange={handleChange}
+              onChange={handleFileChange}
             />
           </label>
+          <span id="fileText" />
           <label htmlFor="name">
             Name
             <input

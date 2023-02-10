@@ -26,12 +26,7 @@ export const CURRENT_USER_QUERY = gql`
             price
             name
             description
-            photo {
-              id
-              image {
-                publicUrlTransformed
-              }
-            }
+            photo
           }
         }
       }

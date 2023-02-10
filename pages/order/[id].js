@@ -35,11 +35,7 @@ export const SINGLE_ORDER_QUERY = gql`
           id
           email
         }
-        photo {
-          image {
-            publicUrlTransformed
-          }
-        }
+        photo
       }
     }
   }
@@ -99,7 +95,7 @@ export default function SingleOrderPage({ query }) {
             {order.items.map((item) => (
               <div className="order-item" key={item.id}>
                 <img
-                  src={item.photo.image.publicUrlTransformed}
+                  src={process.env.NEXT_PUBLIC_IMAGE_PATH + item?.photo}
                   alt={item.title}
                 />
                 <div className="item-details">

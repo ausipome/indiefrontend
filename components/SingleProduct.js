@@ -41,11 +41,7 @@ export const SINGLE_ITEM_QUERY = gql`
       description
       id
       status
-      photo {
-        image {
-          publicUrlTransformed
-        }
-      }
+      photo
     }
   }
 `;
@@ -68,7 +64,7 @@ export default function SingleProduct({ id }) {
         <PriceTag>{formatMoney(Product.price)}</PriceTag>
         {Product.user.id === user.id && <StatusTag>{Product.status}</StatusTag>}
         <img
-          src={Product.photo.image.publicUrlTransformed}
+          src={process.env.NEXT_PUBLIC_IMAGE_PATH + Product?.photo}
           alt={Product.name}
         />
       </div>

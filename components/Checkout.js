@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { loadStripe } from '@stripe/stripe-js';
-
 import {
   CardElement,
   Elements,
@@ -15,7 +14,6 @@ import { Router, useRouter } from 'next/dist/client/router';
 import { useUser, CURRENT_USER_QUERY } from './User';
 import SickButton from './styles/SickButton';
 import { useCart } from '../lib/cartState';
-
 import { USER_ORDERS_QUERY } from '../pages/orders';
 import { ALL_PRODUCTS_QUERY } from './Products';
 import { PAGINATION_QUERY } from './Pagination';

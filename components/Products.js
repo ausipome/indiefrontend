@@ -18,12 +18,7 @@ export const ALL_PRODUCTS_QUERY = gql`
       price
       description
       condition
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
+      photo
       user {
         id
       }

@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
+import { useState } from 'react';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import useForm from '../lib/useForm';
@@ -14,6 +15,7 @@ const SINGLE_PRODUCT_QUERY = gql`
       description
       price
       condition
+      photo
     }
   }
 `;
@@ -25,6 +27,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
     $description: String
     $price: Int
     $condition: String!
+    $photo: String!
   ) {
     updateProduct(
       where: { id: $id }
@@ -34,35 +37,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
         price: $price
         status: "DRAFT"
         condition: $condition
-      }
-    ) {
-      id
-      name
-      description
-      price
-      condition
-    }
-  }
-`;
-
-const UPDATE_IMAGE_MUTATION = gql`
-  mutation UPDATE_IMAGE_MUTATION(
-    $id: ID!
-    $name: String
-    $description: String
-    $priceProduct: Int
-    $image: Upload
-    $condition: String!
-  ) {
-    updateProduct(
-      where: { id: $id }
-      data: {
-        name: $name
-        description: $description
-        price: $priceProduct
-        status: "DRAFT"
-        condition: $condition
-        photo: { create: { image: $image, altText: $name } }
+        photo: $photo
       }
     ) {
       id
@@ -75,19 +50,53 @@ const UPDATE_IMAGE_MUTATION = gql`
 `;
 
 export default function UpdateProduct({ id }) {
+  const [theFile, setTheFile] = useState('');
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      const formData = new FormData();
+      formData.append('image', e.target.files[0]);
+      const theCode = process.env.NEXT_PUBLIC_IMAGE_CODE;
+      formData.append('code', theCode);
+      formData.append('oldFile', theFile);
+
+      fetch(
+        `https://theimagesofindiebubba.toomanyideas.co.uk/imageprocess.php`,
+        {
+          method: 'Post',
+          referrerPolicy: 'no-referrer-when-downgrade',
+          body: formData,
+        }
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.code === 1) {
+            setTheFile(result.file);
+            document.getElementById(
+              'fileText'
+            ).innerHTML = `✅ ${result.realName} Uploaded!`;
+          } else if (result.code === 2) {
+            document.getElementById(
+              'fileText'
+            ).innerHTML = `❌ Image Upload Failed! ${result.message}`;
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  };
+
   const { data, error, loading } = useQuery(SINGLE_PRODUCT_QUERY, {
     variables: { id },
+    async onCompleted(data) {
+      setTheFile(data?.product.photo);
+    },
   });
 
   const [
     updateProduct,
     { data: updateData, error: updateError, loading: updateLoading },
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
-
-  const [
-    updateImageMutation,
-    { data: updateDataIM, error: updateErrorIM, loading: updateLoadingIM },
-  ] = useMutation(UPDATE_IMAGE_MUTATION);
 
   const priceVal = data?.product.price / 100;
 
@@ -97,23 +106,6 @@ export default function UpdateProduct({ id }) {
     description: data?.product.description,
     condition: data?.product.condition,
   });
-
-  async function updateImage() {
-    const res = await updateImageMutation({
-      variables: {
-        id,
-        name: inputs.name,
-        description: inputs.description,
-        price: parseFloat(inputs.price) * 100,
-        image: inputs.image,
-        condition: inputs.condition,
-      },
-      refetchQueries: [
-        { query: ALL_PRODUCTS_QUERY_SELL },
-        'ALL_PRODUCTS_QUERY_SELL',
-      ],
-    });
-  }
 
   if (loading) return <p>loading...</p>;
 
@@ -129,16 +121,13 @@ export default function UpdateProduct({ id }) {
               description: inputs.description,
               price: parseFloat(inputs.price) * 100,
               condition: inputs.condition,
+              photo: theFile,
             },
             refetchQueries: [
               { query: ALL_PRODUCTS_QUERY_SELL },
               'ALL_PRODUCTS_QUERY_SELL',
             ],
           });
-
-          if (inputs.image !== undefined) {
-            updateImage();
-          }
 
           Router.push({
             pathname: `/product/${res.data.updateProduct.id}`,
@@ -147,15 +136,34 @@ export default function UpdateProduct({ id }) {
       >
         <DisplayError error={error || updateError} />
         <fieldset disabled={updateLoading} aria-busy={updateLoading}>
-          <label htmlFor="image">
-            Image
+          <label
+            htmlFor="image"
+            title="Upload Image"
+            style={{
+              fontFamily: 'Arial',
+              border: 'thin solid #000000',
+              width: '180px',
+              cursor: 'pointer',
+              marginTop: '12px',
+              textAlign: 'center',
+              padding: '7px',
+              background: '#fde6ff',
+              color: '#015268',
+              fontSize: '1.2em',
+              display: 'inline-block',
+              marginRight: '12px',
+            }}
+          >
+            Update Image? 🚀
             <input
+              style={{ display: 'none' }}
               type="file"
               id="image"
               name="image"
-              onChange={handleChange}
+              onChange={handleFileChange}
             />
           </label>
+          <span id="fileText" />
           <label htmlFor="name">
             Name
             <input

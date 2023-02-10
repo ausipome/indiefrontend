@@ -10,12 +10,7 @@ export const ALL_PRODUCTS_QUERY_REVIEW = gql`
       name
       price
       description
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
+      photo
     }
   }
 `;

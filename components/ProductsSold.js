@@ -20,12 +20,7 @@ export const ALL_PRODUCTS_QUERY_SOLD = gql`
       email
       timeStamp
       date
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
+      photo
       order {
         user {
           name
