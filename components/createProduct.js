@@ -2,10 +2,67 @@ import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import styled, { keyframes } from 'styled-components';
 import useForm from '../lib/useForm';
 import { ALL_PRODUCTS_QUERY_SELL } from './ProductsSell';
 import Form from './styles/Form';
 import DisplayError from './ErrorMessage';
+
+const spinAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const ButtonLabel = styled.label`
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial;
+  border: thin solid #000000;
+  width: 180px;
+  height: 45px;
+  cursor: pointer;
+  margin-top: 12px;
+  text-align: center;
+  padding: 7px;
+  background: #fde6ff;
+  color: #015268;
+  font-size: 1.2em;
+  display: inline-block;
+  margin-right: 12px;
+
+  & .spinner {
+    display: none;
+  }
+
+  & .normal {
+    display: block;
+  }
+
+  &.processing {
+    & .normal {
+      display: none;
+    }
+    & .spinner {
+      display: block;
+      position: absolute;
+      top: 15%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 0.2rem solid #015268;
+      border-top-color: #fff;
+      animation: ${spinAnimation} 0.6s linear infinite;
+    }
+  }
+`;
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -34,9 +91,11 @@ const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function CreateProduct() {
+  const [isProcessing, setIsProcessing] = useState('');
   const [theFile, setTheFile] = useState('');
   const handleFileChange = (e) => {
     if (e.target.files) {
+      setIsProcessing(true);
       const formData = new FormData();
       formData.append('image', e.target.files[0]);
       const theCode = process.env.NEXT_PUBLIC_IMAGE_CODE;
@@ -55,17 +114,21 @@ export default function CreateProduct() {
         .then((result) => {
           if (result.code === 1) {
             setTheFile(result.file);
-            document.getElementById(
-              'fileText'
-            ).innerHTML = `✅ ${result.realName} Uploaded!`;
+            document.getElementById('fileText').innerHTML = `✅ File Uploaded!`;
+            setIsProcessing(false);
           } else if (result.code === 2) {
             document.getElementById(
               'fileText'
             ).innerHTML = `❌ Image Upload Failed! ${result.message}`;
+            setIsProcessing(false);
           }
         })
         .catch((error) => {
           console.error('Error:', error);
+          document.getElementById(
+            'fileText'
+          ).innerHTML = `❌ Image Upload Failed!`;
+          setIsProcessing(false);
         });
     }
   };
@@ -109,8 +172,13 @@ export default function CreateProduct() {
       </h2>
       <Form
         onSubmit={async (e) => {
-          document.getElementById('conditionMessage').innerHTML = '';
           e.preventDefault();
+          if (isProcessing) {
+            document.getElementById('conditionMessage').innerHTML =
+              'Please wait for file upload to complete!';
+            return;
+          }
+          document.getElementById('conditionMessage').innerHTML = '';
           const el = document.getElementById('condition').value;
           if (el === 'Select') {
             const setError = 'Please select a condition!';
@@ -136,25 +204,13 @@ export default function CreateProduct() {
           &nbsp;
         </span>
         <fieldset disabled={loading} aria-busy={loading}>
-          <label
+          <ButtonLabel
+            className={isProcessing ? 'processing' : ''}
             htmlFor="image"
             title="Upload Image"
-            style={{
-              fontFamily: 'Arial',
-              border: 'thin solid #000000',
-              width: '180px',
-              cursor: 'pointer',
-              marginTop: '12px',
-              textAlign: 'center',
-              padding: '7px',
-              background: '#fde6ff',
-              color: '#015268',
-              fontSize: '1.2em',
-              display: 'inline-block',
-              marginRight: '12px',
-            }}
           >
-            Upload Image 🚀
+            <span className="normal">Upload Image 🚀</span>
+            <span className="spinner" />
             <input
               style={{ display: 'none' }}
               required
@@ -163,7 +219,7 @@ export default function CreateProduct() {
               name="image"
               onChange={handleFileChange}
             />
-          </label>
+          </ButtonLabel>
           <span id="fileText" />
           <label htmlFor="name">
             Name
