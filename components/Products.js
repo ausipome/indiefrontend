@@ -27,6 +27,7 @@ export const ALL_PRODUCTS_QUERY = gql`
 `;
 
 const ProductsListStyles = styled.div`
+  flex-wrap: wrap;
   margin: 0 auto;
   width: 96%;
   display: grid;
@@ -34,17 +35,20 @@ const ProductsListStyles = styled.div`
   row-gap: 35px;
   margin-bottom: 20px;
   @media (min-width: 600px) {
-    column-gap: 10%;
-    row-gap: 2%;
-    grid-template-columns: 40% 40%;
-    margin-bottom: 450px;
+    column-gap: 5%;
+    row-gap: 1%;
+    grid-template-columns: 47% 47%;
+    margin-bottom: 525px;
   }
   @media (min-width: 900px) {
     padding-right: 2%;
     column-gap: 3%;
     row-gap: 2%;
     grid-template-columns: 32% 32% 32%;
-    margin-bottom: 200px;
+    margin-bottom: 450px;
+  }
+  @media (min-width: 900px) {
+    margin-bottom: 400px;
   }
 `;
 
