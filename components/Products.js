@@ -38,17 +38,13 @@ const ProductsListStyles = styled.div`
     column-gap: 5%;
     row-gap: 1%;
     grid-template-columns: 47% 47%;
-    margin-bottom: 525px;
+    margin-bottom: 700px;
   }
   @media (min-width: 900px) {
     padding-right: 2%;
     column-gap: 3%;
-    row-gap: 2%;
     grid-template-columns: 32% 32% 32%;
-    margin-bottom: 450px;
-  }
-  @media (min-width: 900px) {
-    margin-bottom: 400px;
+    margin-bottom: 325px;
   }
 `;
 
