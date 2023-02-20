@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -22,10 +23,19 @@ const BottomNav = styled.div`
 export default function Footer() {
   return (
     <BottomNav>
+      <Link
+        href="/privacy"
+        style={{
+          color: 'black',
+          marginRight: '25px',
+        }}
+      >
+        Privacy &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+      </Link>
       <a
         href="https://indiebubba.com"
         style={{
-          color: 'pink',
+          color: 'black',
           verticalAlign: 'middle',
           marginRight: '10px',
         }}
@@ -66,26 +76,21 @@ export default function Footer() {
       <a
         href="mailto:hello@indiebubba.com"
         style={{
-          color: 'pink',
+          color: 'black',
           marginLeft: '10px',
         }}
       >
         &nbsp; hello@indiebubba.com
       </a>
-
-      <a
-        href="#.com"
+      <Link
+        href="/terms"
         style={{
-          padding: '0',
-          margin: '0',
-          color: 'pink',
-          fontSize: '0.8em',
-          right: '7px',
-          position: 'absolute',
+          color: 'black',
+          marginLeft: '25px',
         }}
       >
-        &copy; TMI Trading Co LTD
-      </a>
+        &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; Terms
+      </Link>
     </BottomNav>
   );
 }
