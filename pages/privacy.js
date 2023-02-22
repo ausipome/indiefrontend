@@ -31,7 +31,8 @@ export default function termsPage() {
     <div style={{ textAlign: 'center' }}>
       <MainStyles>
         <HeadStyle>
-          Privacy Statement <br />
+          Privacy
+          <br />
           Statement
           <h2 style={{ marginTop: '12px' }}>
             IndieBubba.com is committed to protecting the privacy of our

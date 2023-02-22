@@ -51,7 +51,7 @@ export default function NavMenu() {
                     <Link href="/contact">Contact</Link>
                   </li>
                   <SignOut />
-
+                  {/*
                   <a type="button" onClick={openCart}>
                     🛒
                     <CartCount
@@ -62,6 +62,7 @@ export default function NavMenu() {
                       )}
                     />
                   </a>
+                      */}
                 </>
               )}
               {!user && (
