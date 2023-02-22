@@ -54,7 +54,9 @@ export default function AddToCart({ id }) {
         style={{ fontSize: '1.15em', borderRadius: '15px' }}
       >
         {/* Login to Add To Cart 🛒 */}
-        Marketplace Opens 1st March 2023!
+        <span style={{ color: 'green' }}>
+          Marketplace Opens 1st March 2023!
+        </span>
       </button>
     </Link>
   );
