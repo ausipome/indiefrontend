@@ -62,7 +62,9 @@ export default function SingleProduct({ id }) {
       </Head>
       <div style={{ position: 'relative' }}>
         <PriceTag>{formatMoney(Product.price)}</PriceTag>
-        {Product.user.id === user.id && <StatusTag>{Product.status}</StatusTag>}
+        {Product.user.id === user?.id && (
+          <StatusTag>{Product.status}</StatusTag>
+        )}
         <img
           src={process.env.NEXT_PUBLIC_IMAGE_PATH + Product?.photo}
           alt={Product.name}
@@ -71,9 +73,9 @@ export default function SingleProduct({ id }) {
       <div className="details">
         <h2>{Product.name}</h2>
         <h4>{Product.description}</h4>
-        {Product.user.id !== user.id && <AddToCartButton id={Product.id} />}
+        {Product.user.id !== user?.id && <AddToCartButton id={Product.id} />}
 
-        {Product.user.id === user.id && (
+        {Product.user.id === user?.id && (
           <div style={{ marginTop: '15px', textAlign: 'right' }}>
             <Link
               href={{

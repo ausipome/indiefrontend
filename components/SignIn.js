@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { ApolloConsumer, useMutation } from '@apollo/client';
 import { useState } from 'react';
+import Link from 'next/link';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
 import { CURRENT_USER_QUERY, useUser } from './User';
@@ -118,6 +119,9 @@ export default function SignIn() {
           </label>
           <button type="submit">Login</button>
         </fieldset>
+        <p style={{ marginTop: '20px' }}>
+          <Link href="/Register">Don't have an account? Sign up here!</Link>
+        </p>
       </Form>
     </>
   );

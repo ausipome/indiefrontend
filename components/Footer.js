@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styled from 'styled-components';
 import Image from 'next/image';
 
@@ -20,19 +19,26 @@ const BottomNav = styled.div`
   }
 `;
 
+const HideMe = styled.a`
+  display: inline-block;
+  @media (max-width: 680px) {
+    display: none;
+  }
+`;
+
 export default function Footer() {
   return (
     <BottomNav>
-      <Link
-        href="/privacy"
+      <a
+        href="https://indiebubba.com/privacy"
         style={{
           color: 'black',
-          marginRight: '25px',
+          marginRight: '10px',
         }}
       >
-        Privacy &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
-      </Link>
-      <a
+        Privacy
+      </a>
+      <HideMe
         href="https://indiebubba.com"
         style={{
           color: 'black',
@@ -40,8 +46,8 @@ export default function Footer() {
           marginRight: '10px',
         }}
       >
-        indiebubba.com &nbsp;
-      </a>
+        &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; indiebubba.com &nbsp;
+      </HideMe>
       <a
         target="_blank"
         href="https://instagram.com/indiebubba"
@@ -73,24 +79,24 @@ export default function Footer() {
           height="40"
         />
       </a>
-      <a
+      <HideMe
         href="mailto:hello@indiebubba.com"
         style={{
           color: 'black',
           marginLeft: '10px',
         }}
       >
-        &nbsp; hello@indiebubba.com
-      </a>
-      <Link
-        href="/terms"
+        &nbsp; hello@indiebubba.com &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+      </HideMe>
+      <a
+        href="https://indiebubba.com/terms"
         style={{
           color: 'black',
-          marginLeft: '25px',
+          marginLeft: '10px',
         }}
       >
-        &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; Terms
-      </Link>
+        Terms
+      </a>
     </BottomNav>
   );
 }
