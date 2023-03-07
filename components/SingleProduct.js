@@ -71,6 +71,12 @@ export default function SingleProduct({ id }) {
         />
       </div>
       <div className="details">
+        {Product.status === 'Draft' && (
+          <h2 style={{ color: 'red' }}>
+            Product is currently in review. It will be reviewed and posted
+            shortly.
+          </h2>
+        )}
         <h2>{Product.name}</h2>
         <h4>{Product.description}</h4>
         {Product.user.id !== user?.id && <AddToCartButton id={Product.id} />}
