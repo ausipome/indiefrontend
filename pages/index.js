@@ -81,17 +81,6 @@ export default function IndexPage() {
         }}
       >
         Marketplace
-        <br />
-        <span
-          style={{
-            fontSize: '0.6em',
-            fontWeight: 'normal',
-            textShadow: '0px 0px #000000',
-            color: 'black',
-          }}
-        >
-          Opens for buyers 1st March 2023 <br /> Register now and start selling!
-        </span>
       </h1>
       <Products page={page || 1} />
       <div style={{ marginBottom: '55px' }}>
