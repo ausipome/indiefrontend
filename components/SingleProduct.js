@@ -71,7 +71,7 @@ export default function SingleProduct({ id }) {
         />
       </div>
       <div className="details">
-        {Product.status === 'Draft' && (
+        {Product.status === 'DRAFT' && (
           <h2 style={{ color: 'red' }}>
             Product is currently in review. It will be reviewed and posted
             shortly.
