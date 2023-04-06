@@ -371,8 +371,11 @@ export default function Product({ product, pageType }) {
         <Link href={`/product/${product.id}`}>{product.name}</Link>
       </Title>
       <PriceTag>
-        {formatMoney(product.price)}
+        {formatMoney(product.price - product.price * 0.2)}
         <br />
+        <span style={{ textDecoration: 'line-through' }}>
+          Was {formatMoney(product.price)}
+        </span>
         <span>Inc Postage</span>
       </PriceTag>
       <StatusTag>{product.condition}</StatusTag>
