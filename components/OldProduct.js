@@ -373,10 +373,11 @@ export default function Product({ product, pageType }) {
       <PriceTag>
         {formatMoney(product.price - product.price * 0.2)}
         <br />
-        <span style={{ textDecoration: 'line-through' }}>
+        <span>Inc Postage</span>
+        <br />
+        <span style={{ textDecoration: 'line-through', color: 'red' }}>
           Was {formatMoney(product.price)}
         </span>
-        <span>Inc Postage</span>
       </PriceTag>
       <StatusTag>{product.condition}</StatusTag>
       <p style={{ color: '#015268' }}>{product.description}</p>
