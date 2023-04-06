@@ -80,9 +80,14 @@ function CheckoutForm() {
 
     // 3. Calculate Total
     const cartItems = theUser.cart.filter((cartItem) => cartItem.product);
-    const amount = cartItems.reduce(function (tally, cartItem) {
-      return tally + cartItem.quantity * cartItem.product.price;
+    let amount = cartItems.reduce(function (tally, cartItem) {
+      return (
+        tally +
+        cartItem.quantity *
+          (cartItem.product.price - cartItem.product.price * 0.2)
+      );
     }, 0);
+    amount = parseInt(amount);
 
     // 4. create payment intent via server and returns client secret
 
