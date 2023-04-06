@@ -60,7 +60,7 @@ export default function UpdateProduct({ id }) {
       formData.append('oldFile', theFile);
 
       fetch(
-        `https://theimagesofindiebubba.toomanyideas.co.uk/imageprocess.php`,
+        `https://toomanyideas.co.uk/imageprocess.php`,
         {
           method: 'Post',
           referrerPolicy: 'no-referrer-when-downgrade',

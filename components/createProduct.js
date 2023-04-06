@@ -102,14 +102,11 @@ export default function CreateProduct() {
       formData.append('code', theCode);
       formData.append('oldFile', theFile);
 
-      fetch(
-        `https://theimagesofindiebubba.toomanyideas.co.uk/imageprocess.php`,
-        {
-          method: 'Post',
-          referrerPolicy: 'no-referrer-when-downgrade',
-          body: formData,
-        }
-      )
+      fetch(`https://toomanyideas.co.uk/imageprocess.php`, {
+        method: 'Post',
+        referrerPolicy: 'no-referrer-when-downgrade',
+        body: formData,
+      })
         .then((response) => response.json())
         .then((result) => {
           if (result.code === 1) {
