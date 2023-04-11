@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import Product from './OldProduct';
+import Product from './Product';
 import { useUser } from './User';
 
 export const ALL_PRODUCTS_QUERY_SOLD = gql`
