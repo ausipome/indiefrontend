@@ -58,13 +58,7 @@ export default function Cart() {
         ))}
       </ul>
       <footer>
-        <p style={{ textDecoration: 'line-through', color: 'red' }}>
-          Was {formatMoney(calcTotalPrice(me.cart))}
-        </p>
-        <p>
-          Now{' '}
-          {formatMoney(calcTotalPrice(me.cart) - calcTotalPrice(me.cart) * 0.2)}
-        </p>
+        <p>{formatMoney(calcTotalPrice(me.cart))}</p>
         <Checkout />
       </footer>
     </CartStyles>

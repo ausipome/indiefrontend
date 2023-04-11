@@ -81,11 +81,6 @@ export default function IndexPage() {
         }}
       >
         Marketplace
-        <br />
-        <span style={{ color: 'red', fontSize: '0.8em' }}>
-          Happy Easter, 20% Off Everything! <br />
-          7th April – 10th April 2023
-        </span>
       </h1>
       <Products page={page || 1} />
       <div style={{ marginBottom: '55px' }}>

@@ -61,7 +61,7 @@ export default function SingleProduct({ id }) {
         <title>Indie Bubba | {Product.name}</title>
       </Head>
       <div style={{ position: 'relative' }}>
-        <PriceTag>{formatMoney(Product.price - Product.price * 0.2)}</PriceTag>
+        <PriceTag>{formatMoney(Product.price)}</PriceTag>
         {Product.user.id === user?.id && (
           <StatusTag>{Product.status}</StatusTag>
         )}
